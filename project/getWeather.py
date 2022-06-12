@@ -15,13 +15,40 @@ class Weather:
         self.general_final_info = "Nothing to show yet"
         self.specific_final_data = "Nothing to show yet"
 
-    def get_final_results(self):
+    def get_final_results(self) -> (str, str):
+        """
+        description: getter for final result report on weather in form of tuple of strings
+        parameter:
+        return: tuple of strings with final report on weather
+                First element represents essential data
+                Second element represents additional weather data
+        """
         return self.general_final_info, self.specific_final_data
 
-    def get_final_results_dict(self):
+    def get_final_results_dict(self) -> dict:
+        """
+        description: getter for final result report on weather in form of dictionary
+        parameter:
+        return: dictionary with weather data
+                    "city": info about city of weather measures
+                    "condition": general description of weather conditions
+                    "temperature": average temperature in Celsius degrees
+                    "max temp": max temperature in Celsius degrees
+                    "min temp": min temperature in Celsius degrees
+                    "pressure": pressure in hPa
+                    "humidity": humidity in %
+                    "wind": wind speed in m/s
+                    "sunrise": time of sunrise
+                    "sunset": time of sunset
+        """
         return self.dict_final_data
 
-    def get_geocode(self, new_city=None):
+    def get_geocode(self, new_city: str = None) -> None:
+        """
+        description: getter for geocode coordinates for given city
+        parameter: new_city - parameter used to change city of weather measure - default: None
+        return: None
+        """
         if new_city: self.city_name = new_city
         api = "http://api.openweathermap.org/geo/1.0/direct?q=" + self.city_name + "&limit=1&appid=" + appid
         json_data = requests.get(api).json()
@@ -30,7 +57,12 @@ class Weather:
         self.latitude = json_data[0]['lat']
         self.longitude = json_data[0]['lon']
 
-    def get_weather(self, name=None):
+    def get_weather(self, name=None) -> None:
+        """
+        description: method downloads weather info for given city through Open Weather API
+        parameter: name: Any - default=None
+        return: None
+        """
         if None not in [self.city_name, self.latitude, self.longitude]:
             api = "https://api.openweathermap.org/data/2.5/weather?lat=" + str(self.latitude) + "&lon=" + str(self.longitude) + "&appid=" + appid + "&units=metric"
         else:
@@ -61,5 +93,10 @@ class Weather:
                                 "min temp": min_temp, "pressure": pressure, "humidity": humidity, "wind": wind,
                                 "sunrise": sunrise, "sunset": sunset}
 
-    def set_city(self, name):
+    def set_city(self, name: str) -> None:
+        """
+        description: setter for city of weather measurement
+        parameter: name - name of new city - str
+        return: None
+        """
         self.get_geocode(new_city=name)

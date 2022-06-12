@@ -2,7 +2,9 @@ from project.getWeather import Weather
 
 
 def test_Krakow_is_default_city():
-
+    """
+    description: test case checks if default city for weather forecast report is Krakow
+    """
     weather_obj = Weather()
 
     weather_obj.get_weather()
@@ -10,7 +12,9 @@ def test_Krakow_is_default_city():
 
 
 def test_default_has_all_fields():
-
+    """
+    description: test case checks if report for default city is gathered and has all designed fields
+    """
     weather_obj = Weather()
 
     weather_obj.get_weather()
@@ -20,7 +24,9 @@ def test_default_has_all_fields():
 
 
 def test_default_has_all_fields_not_empty():
-
+    """
+    description: test case checks if report for default city is gathered and all designed fields have values
+    """
     weather_obj = Weather()
 
     weather_obj.get_weather()
@@ -29,6 +35,10 @@ def test_default_has_all_fields_not_empty():
 
 
 def test_set_city():
+    """
+    description: test case checks if setter for a different city works properly and after setting city as 'Tarnow'
+                 app gathers weather report for given city
+    """
     weather_obj = Weather()
 
     weather_obj.set_city("Tarnow")
@@ -38,6 +48,10 @@ def test_set_city():
 
 
 def test_set_city_has_all_fields_not_empty():
+    """
+    description: test case checks if after setting city as 'Tarnow' app gathers weather report for given city and
+                 data in report are valid
+    """
     weather_obj = Weather()
 
     weather_obj.set_city("Tarnow")
@@ -50,6 +64,9 @@ def test_set_city_has_all_fields_not_empty():
 
 
 def test_set_city_fails_and_city_stays_default():
+    """
+    description: test case checks if after faulty setting city as empty string app gathers weather report for default city
+    """
     weather_obj = Weather()
 
     weather_obj.set_city("")

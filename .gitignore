@@ -1,0 +1,6 @@
+# ignore ALL .pyc files
+*.pyc
+
+# ignore specific files
+bootstrap.sh
+weather_tkinter.py

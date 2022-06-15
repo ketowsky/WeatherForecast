@@ -77,7 +77,7 @@ def test_set_city_is_empty_and_city_stays_default():
 
 def test_set_city_fails_and_city_stays_default():
     """
-    description: test case checks if after faulty setting city as empty string app gathers weather report for default city
+    description: test case checks if after faulty setting city as incorrect string app gathers weather report for default city
     """
     weather_obj = Weather()
 

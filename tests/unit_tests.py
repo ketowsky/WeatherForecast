@@ -63,13 +63,25 @@ def test_set_city_has_all_fields_not_empty():
     assert None not in weather_obj.get_final_results_dict().values()
 
 
-def test_set_city_fails_and_city_stays_default():
+def test_set_city_is_empty_and_city_stays_default():
     """
     description: test case checks if after faulty setting city as empty string app gathers weather report for default city
     """
     weather_obj = Weather()
 
     weather_obj.set_city("")
+    weather_obj.get_weather()
+
+    assert weather_obj.get_final_results_dict()['city'] == 'Krakow'
+
+
+def test_set_city_fails_and_city_stays_default():
+    """
+    description: test case checks if after faulty setting city as empty string app gathers weather report for default city
+    """
+    weather_obj = Weather()
+
+    weather_obj.set_city("rrr")
     weather_obj.get_weather()
 
     assert weather_obj.get_final_results_dict()['city'] == 'Krakow'

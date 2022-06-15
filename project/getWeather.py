@@ -49,13 +49,20 @@ class Weather:
         parameter: new_city - parameter used to change city of weather measure - default: None
         return: None
         """
-        if new_city: self.city_name = new_city
+        if new_city:
+            backup_name = self.city_name
+            self.city_name = new_city
+
         api = "http://api.openweathermap.org/geo/1.0/direct?q=" + self.city_name + "&limit=1&appid=" + appid
         json_data = requests.get(api).json()
 
-        self.city_name = json_data[0]['name']
-        self.latitude = json_data[0]['lat']
-        self.longitude = json_data[0]['lon']
+        if json_data:
+            self.city_name = json_data[0]['name']
+            self.latitude = json_data[0]['lat']
+            self.longitude = json_data[0]['lon']
+        else:
+            self.city_name = backup_name
+            print("Chosen city was not recognized, so city stays default")
 
     def get_weather(self, name=None) -> None:
         """
